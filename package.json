@@ -1,0 +1,27 @@
+{
+  "name": "hola-react",
+  "version": "1.0.0",
+  "description": "This is Hola React by Akarsh Chandrashekar",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chandrashekar-Akarsh/nReact2.git"
+  },
+  "keywords": [],
+  "author": "Akarsh Chandrashekar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chandrashekar-Akarsh/nReact2/issues"
+  },
+  "homepage": "https://github.com/Chandrashekar-Akarsh/nReact2#readme",
+  "devDependencies": {
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

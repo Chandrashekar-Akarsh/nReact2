@@ -1,3 +1,6 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+
 // const heading = React.createElement(
 //   "h1",
 //   { id: "heading1" },
@@ -28,7 +31,7 @@ const elementToRender = React.createElement(
   { id: "parent" },
   React.createElement("div", { id: "child" }, [
     React.createElement("h1", {}, "NOICE"),
-    React.createElement("h2", {}, "This is Sibling of NOICE"),
+    React.createElement("h2", {}, "This is Sibling of NOICE!!!"),
   ])
 );
 const root = ReactDOM.createRoot(document.getElementById("root"));
