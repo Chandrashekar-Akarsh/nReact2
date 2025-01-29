@@ -908,7 +908,7 @@ export const res_data = {
                 restaurants: [
                   {
                     info: {
-                      id: "43836",
+                      id: "4383677777888888888888",
                       name: "McDonald's",
                       cloudinaryImageId:
                         "RX_THUMBNAIL/IMAGES/VENDOR/2024/9/18/5e7991d9-6a0d-4034-82a9-59bd2bbdc0b3_43836.jpg",
@@ -7242,3 +7242,15 @@ export const res_data = {
   deviceId: "e80df235-fbf6-c641-973e-c9e63134e7ae",
   csrfToken: "aavwas7pocqr-Ads_niAsN3CuDpRCkAlugqnbcF4",
 };
+
+const res_list1 =
+  res_data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+    ?.restaurants;
+
+const res_list_top =
+  res_data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+    ?.restaurants;
+
+const res_list = [...res_list1, ...res_list_top];
+
+export default res_list;

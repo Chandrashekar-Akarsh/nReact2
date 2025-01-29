@@ -60,6 +60,10 @@
 .search {
   padding: 10px;
 }
+
+.filter-btn {
+  margin: 10px;
+}
 /* .logo-container > img {
   height: 80px;
   width: 100px;
