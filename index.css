@@ -16,6 +16,7 @@
 .nav-items {
   padding: 0px 20px;
   align-items: center;
+  display: flex;
 }
 .nav-items > ul {
   display: flex;
@@ -44,6 +45,21 @@
   overflow: hidden;
 }
 
+.shimhomecont {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shim-res-card {
+  padding: 5px;
+  height: 530px;
+  width: 250px;
+  background-color: #f0f0f0;
+  border: solid #f0f0f0 1px;
+  margin: 5px;
+  transition: box-shadow 0.3s ease;
+  overflow: hidden;
+}
 .res-card:hover {
   border: solid black 1px;
   /* background-color: #e6e6e6; */
@@ -63,6 +79,11 @@
 
 .filter-btn {
   margin: 10px;
+}
+
+.log-btn {
+  height: 45px;
+  width: 80px;
 }
 /* .logo-container > img {
   height: 80px;
