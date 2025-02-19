@@ -53,10 +53,15 @@ const RestaurantMenuAccordian = (props) => {
                   <p className="mt-4">{item?.card?.info?.description}</p>
                 </div>
                 <div className="w-[40%] justify-items-end">
-                  <img
-                    className="mt-2 rounded-lg w-[156px] h-[144px] object-cover"
-                    src={RES_MENU_IMAGE_URL + item?.card?.info?.imageId}
-                  ></img>
+                  <div className="relative w-[156px] h-[144px]">
+                    <img
+                      className="mt-2 rounded-lg w-[156px] h-[144px] object-cover"
+                      src={RES_MENU_IMAGE_URL + item?.card?.info?.imageId}
+                    ></img>
+                    <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 bg-black text-white text-sm font-medium px-4 py-1 rounded-2xl border-2 border-black">
+                      Add +
+                    </div>
+                  </div>
                 </div>
               </div>
             );
