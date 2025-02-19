@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import ShimmerHome from "./ShimmerHome";
 import { Link } from "react-router-dom";
@@ -11,11 +11,13 @@ const Body = () => {
   const [seachText, setSearchText] = useState("");
   const { resListAll, loading, error } = useFetchResListHome();
   const onLine = useOnlineStatus();
+  const RestuarantCardPromoted = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     if (resListAll?.length) {
       setALLRestaurants(resListAll);
       setListOfRestaurants(resListAll);
+      console.log("resListAll", resListAll);
     }
   }, [resListAll]);
 
@@ -34,39 +36,44 @@ const Body = () => {
   return (
     allRestaurants && (
       <div className="body">
-        <div className="search">
-          <input
-            type="text"
-            value={seachText}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
-          />
-          <button
-            onClick={() => {
-              let filteredRestautants = allRestaurants.filter((obj) =>
-                obj.info.name.toLowerCase().includes(seachText.toLowerCase())
-              );
-              setListOfRestaurants(filteredRestautants);
-            }}
-          >
-            Search
-          </button>
+        <div className="flex items-center">
+          <div className="search m-4 p-4 ">
+            <input
+              type="text"
+              className="border border-solid border-black"
+              value={seachText}
+              onChange={(e) => {
+                setSearchText(e.target.value);
+              }}
+            />
+            <button
+              className="px-4 py-2 bg-green-100 m-4 rounded-lg"
+              onClick={() => {
+                let filteredRestautants = allRestaurants.filter((obj) =>
+                  obj.info.name.toLowerCase().includes(seachText.toLowerCase())
+                );
+                setListOfRestaurants(filteredRestautants);
+              }}
+            >
+              Search
+            </button>
+          </div>
+          <div className="filter-btn m-4">
+            <button
+              className="px-4 py-2 bg-gray-100 rounded-lg"
+              onClick={() => {
+                let filteredRestautants = allRestaurants.filter(
+                  (obj) => obj.info.avgRating > 4.5
+                );
+                setListOfRestaurants(filteredRestautants);
+                // fetchUpdatedResListHome();
+              }}
+            >
+              Top Rated Restaurants
+            </button>
+          </div>
         </div>
-        <div className="filter-btn">
-          <button
-            onClick={() => {
-              let filteredRestautants = allRestaurants.filter(
-                (obj) => obj.info.avgRating > 4.5
-              );
-              setListOfRestaurants(filteredRestautants);
-              // fetchUpdatedResListHome();
-            }}
-          >
-            Top Restaurants
-          </button>
-        </div>
-        <div className="res-container">
+        <div className="flex flex-wrap">
           {listOfRestaurants.map((obj) => {
             return (
               <Link
@@ -74,7 +81,11 @@ const Body = () => {
                 key={obj?.info?.id}
                 to={"/restaurant/" + obj?.info?.id}
               >
-                <RestaurantCard res_data={obj} />
+                {obj?.promoted ? (
+                  <RestuarantCardPromoted res_data={obj} />
+                ) : (
+                  <RestaurantCard res_data={obj} />
+                )}
               </Link>
             );
           })}

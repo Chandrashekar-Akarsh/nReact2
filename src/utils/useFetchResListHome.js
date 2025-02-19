@@ -33,7 +33,8 @@ const useFetchResListHome = () => {
         throw new Error("Restaurant List Empty");
 
       const allRestaurants = filterAllRestaurants(comninedListOFRestaurants);
-      setResListAll(allRestaurants);
+      const promotedLabelAdded = addPromotedLabel(allRestaurants);
+      setResListAll(promotedLabelAdded);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -67,6 +68,13 @@ const useFetchResListHome = () => {
         return true;
       }
     });
+  };
+
+  const addPromotedLabel = (resList) => {
+    return resList.map((res) => ({
+      ...res,
+      promoted: Math.random() < 0.5,
+    }));
   };
 
   return { resListAll, loading, error };
