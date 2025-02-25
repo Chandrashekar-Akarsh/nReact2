@@ -2,14 +2,14 @@ import { LOGO_URL } from "../utils/constants";
 import React, { useState, useEffect, use } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnNameReact, setBtnNameReact] = useState("Log In");
   const onlineStatus = useOnlineStatus();
+  const cartItems = useSelector((store) => store.cart.cartItems);
 
-  useEffect(() => {
-    console.log("Use Effect btnNameReact dependency array in  Header called ");
-  }, [btnNameReact]);
+  useEffect(() => {}, [btnNameReact]);
 
   return (
     <div className="flex justify-between bg-pink-100 shadow-lg mb-2 align-middle">
@@ -32,7 +32,7 @@ const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li>
-            <Link to="/">Cart</Link>
+            <Link to="/cart">Cart - ({cartItems.length}) </Link>
           </li>
           <button
             className="log-btn"

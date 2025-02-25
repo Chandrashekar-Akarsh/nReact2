@@ -2,8 +2,12 @@ import { useParams } from "react-router-dom";
 import ShimmerHome from "./ShimmerHome";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantMenuAccordian from "./RestaurantMenuAccordian";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
+  const [showIndex, setShowIndex] = useState(null);
+  const [showIndexCategory, setShowIndexCategory] = useState(null);
+
   const { res_id } = useParams();
   const resInfo = useRestaurantMenu(res_id);
 
@@ -14,8 +18,6 @@ const RestaurantMenu = () => {
   const { filteredMenuCardsObj } = resInfo;
 
   const { itemCards } = resInfo?.itemCards;
-
-  console.log("filteredMenuCardsObj", filteredMenuCardsObj);
 
   //
 
@@ -62,7 +64,7 @@ const RestaurantMenu = () => {
         -- MENU --
       </h2>
       <div>
-        {filteredMenuCardsObj.map((obj) => {
+        {filteredMenuCardsObj.map((obj, index) => {
           if (
             obj?.card?.card?.["@type"] ===
             "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
@@ -70,13 +72,24 @@ const RestaurantMenu = () => {
             const title = obj?.card?.card?.title;
             const items = obj?.card?.card?.itemCards;
             return (
-              <>
+              <div key={obj?.card?.card?.title}>
                 <RestaurantMenuAccordian
-                  key={obj?.card?.card?.title}
-                  data={{ title: title, items: items, subMenu: false }}
+                  data={{
+                    title: title,
+                    items: items,
+                    subMenu: false,
+                    isOpen: showIndex === index ? true : false,
+                  }}
+                  setIndex={() => {
+                    setShowIndex(index);
+                    // setShowIndexCategory(null);
+                  }}
+                  clearIndex={() => {
+                    setShowIndex(null);
+                  }}
                 />
-                <div class="h-4 bg-gray-100 my-3"></div>
-              </>
+                <div className="h-4 bg-gray-100 my-3"></div>
+              </div>
             );
           } else {
             return (
@@ -84,14 +97,28 @@ const RestaurantMenu = () => {
                 <h2 className="text-lg font-extrabold">
                   {obj?.card?.card?.title}
                 </h2>
-                {obj?.card?.card?.categories?.map((obj1) => {
+                {obj?.card?.card?.categories?.map((obj1, index1) => {
                   return (
                     <RestaurantMenuAccordian
                       key={obj1?.categoryId}
+                      // key={obj1?.card?.card?.title}
                       data={{
                         title: obj1?.title,
                         items: obj1?.itemCards,
                         subMenu: true,
+                        isOpen:
+                          showIndexCategory === index1 && showIndex === index
+                            ? true
+                            : false,
+                      }}
+                      setIndex={() => {
+                        setShowIndex(index);
+                        setShowIndexCategory(index1);
+                        // setShowIndex(null);
+                      }}
+                      clearIndex={() => {
+                        setShowIndex(null);
+                        setShowIndexCategory(null);
                       }}
                     />
                   );
